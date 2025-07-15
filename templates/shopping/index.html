@@ -6,9 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    {% for shop in object_list %}
-        <p>{{ shop.shop_name }}</p>
+    {% for goods in object_list %}
+        <p>{{ goods.goods_name }}</p>
+        <p>{{ goods.price }}円</p>
+        <p>{{ goods.description }}</p>
+        <p>{{ shops.shop_name }}</p>
+        <img src="./../media/{{ goods.picture }}" width="200"></img>
     {% endfor %}
-    
+    <br>
+    <a href="/upload">画像をアップロード</a>
 </body>
 </html>
