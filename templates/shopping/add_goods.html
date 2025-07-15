@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>写真をアップロード</h1>
+    <h1>商品を追加</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">アップロード</button>
+        <button type="submit">商品を追加</button>
     </form>
     {% comment %} <a href="{% url 'picture_list' %}">一覧へ</a> {% endcomment %}
     <a href="/shop">一覧へ</a>
