@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import generic, View
 from .models import Shops, Goods, Accounts, Orderhistory
-from .forms import PictureForm
+from .forms import GoodsForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -33,8 +33,8 @@ class DetailView(View):
     
     
 class PictureUploadView(View):
-    template_name = 'shopping/picture.html'
-    form_class = PictureForm
+    template_name = 'shopping/add_goods.html'
+    form_class = GoodsForm
     
     def get(self, request):
         form = self.form_class()
@@ -44,12 +44,16 @@ class PictureUploadView(View):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('detail')
+            return redirect('./../shop/')
         return render(request, self.template_name, {'form': form})
     
+class CreateView(generic.CreateView):
+    model = Goods
+    template_name = 'shopping/add.html'
+    fields = ['goods_name', 'price', 'description', 'shops_id', '']
 
 shopping = IndexView.as_view()
 detail = DetailView.as_view()
 picture_upload = PictureUploadView.as_view()
-# create = CreateView.as_view()
+create = CreateView.as_view()
 
