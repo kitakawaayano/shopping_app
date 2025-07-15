@@ -15,6 +15,9 @@ class Goods(models.Model):
     picture = models.ImageField(upload_to='imgs/')
     number = models.IntegerField()
     
+    def __str__(self):
+        return self.goods_name or f"Goods {self.goods_id}"
+    
 class Accounts(models.Model):
     account_id = models.AutoField(primary_key=True)
     account_name = models.CharField(max_length=50)

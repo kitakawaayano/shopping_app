@@ -5,3 +5,6 @@ pychache
 *.pyc
 # .DS_Store
 .env
+
+*.log
+db-volumes/
