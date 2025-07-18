@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品詳細ページ</title>
+</head>
+<body>
+    <h1>{{ goods.goods_name }}の商品詳細</h1>
+    <div>
+        <p>{{ goods.price }}円</p>
+        <p>{{ goods.description }}</p>
+        <p>{{ goods.shops_id }}</p>
+        <img src="{{ goods.picture.url }}" alt="{{ goods.goods_name }}">
+        <p>{{ goods.number }}個</p>
+    </div>
+    <p><a href="{% url 'shopping_app:shopping' %}">一覧ページへ戻る</a></p>
+</body>
+</html>

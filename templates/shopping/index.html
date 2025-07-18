@@ -6,12 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>商品一覧</h1>
     {% for goods in object_list %}
-        <p>{{ goods.goods_name }}</p>
-        <p>{{ goods.price }}円</p>
-        <p>{{ goods.description }}</p>
-        <p>{{ shops.shop_name }}</p>
-        <img src="./../media/{{ goods.picture }}" width="200"></img>
+        <div>
+            <p><a href="{% url 'shopping_app:detail' goods.goods_id %}">{{ goods.goods_name }}</a></p>
+            <p>{{ goods.price }}円</p>
+            <p>{{ goods.description }}</p>
+            <p>{{ shops.shop_name }}</p>
+            <img src="./../media/{{ goods.picture }}" width="200" height="200"></img>
+        </div>
     {% endfor %}
     <br>
     <a href="/upload">商品を追加</a>

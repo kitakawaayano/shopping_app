@@ -8,7 +8,7 @@ from django.views.generic import RedirectView
 app_name = "shopping_app"
 urlpatterns = [
     path('shop/', shopping, name='shopping'),
-    path('detail/', detail, name='detail'),
+    path('detail/<int:pk>', detail, name='detail'),
     path('', RedirectView.as_view(url='/shop/')),
     path('upload/', picture_upload, name='picture_upload'),
     path('create/', create, name='create'),
