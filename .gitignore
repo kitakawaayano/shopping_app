@@ -8,3 +8,4 @@ pychache
 
 *.log
 db-volumes/
+media/

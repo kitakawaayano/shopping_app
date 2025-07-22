@@ -3,7 +3,7 @@ from django.views import generic, View
 from .models import Shops, Goods, Accounts, Orderhistory
 from .forms import GoodsForm
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 # Create your views here.
 # class shopping(generic.ListView):
@@ -28,7 +28,7 @@ class DetailView(generic.DetailView):
     template_name = 'shopping/detail.html'
     
     
-class PictureUploadView(View):
+class CreateView(View):
     template_name = 'shopping/add_goods.html'
     form_class = GoodsForm
     
@@ -43,13 +43,19 @@ class PictureUploadView(View):
             return redirect('./../shop/')
         return render(request, self.template_name, {'form': form})
     
-class CreateView(generic.CreateView):
+    
+class UpdateView(generic.UpdateView):
     model = Goods
-    template_name = 'shopping/add.html'
-    fields = ['goods_name', 'price', 'description', 'shops_id', '']
+    form_class = GoodsForm
+    template_name = 'shopping/add_goods.html'
+    print("aa")
+    def get_success_url(self):
+        return reverse_lazy('shopping_app:shopping')
+    
+    
 
 shopping = IndexView.as_view()
 detail = DetailView.as_view()
-picture_upload = PictureUploadView.as_view()
 create = CreateView.as_view()
+update = UpdateView.as_view()
 
