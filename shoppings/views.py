@@ -52,10 +52,14 @@ class UpdateView(generic.UpdateView):
     def get_success_url(self):
         return reverse_lazy('shopping_app:shopping')
     
+class DeleteView(generic.DeleteView):
+    model = Goods
+    template_name = 'shopping/delete.html'
+    success_url = reverse_lazy('shopping_app:shopping')
     
 
 shopping = IndexView.as_view()
 detail = DetailView.as_view()
 create = CreateView.as_view()
 update = UpdateView.as_view()
-
+delete = DeleteView.as_view()
