@@ -15,6 +15,7 @@
         <p>{{ goods.number }}個</p>
     </div>
     <p><a href="{% url "shopping_app:update" goods.goods_id %}">編集</a></p>
+    <p><a href="{% url "shopping_app:delete" goods.goods_id %}">削除</a></p>
     <p><a href="{% url 'shopping_app:shopping' %}">一覧ページへ戻る</a></p>
 </body>
 </html>
