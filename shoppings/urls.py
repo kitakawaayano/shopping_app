@@ -13,6 +13,6 @@ urlpatterns = [
     path('create/', create, name='create'),
     path('update/<int:pk>', update, name='update'),
     path('delete/<int:pk>', delete, name='delete'),
-    path('search/', views.search, name='search'),
+    path('search/', search, name='search'),
 ]
 

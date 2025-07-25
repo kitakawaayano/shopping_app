@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>検索結果：</h1>
+    {% if Goods %}
+        {% for goods in Goods %}
+            <div>
+                <p><a href="{% url 'shopping_app:detail' goods.goods_id %}">{{ goods.goods_name }}</a></p>
+                <p>{{ goods.price }}円</p>
+                <p>{{ goods.description }}</p>
+                <p>{{ shops.shop_name }}</p>
+                <img src="./../media/{{ goods.picture }}" width="200" height="200"></img>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>一致する投稿はありません。</p>
+    {% endif %}
+</body>
+</html>
