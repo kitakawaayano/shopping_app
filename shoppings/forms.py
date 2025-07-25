@@ -14,3 +14,22 @@ class GoodsForm(forms.ModelForm):
             "picture":"画像",
             "number":"個数",
         }
+
+class SearchForm(forms.Form):
+    words = forms.CharField(
+        label='', 
+        max_length=50, 
+        widget=forms.TextInput(attrs={
+            'placeholder':'キーワードを入力', 
+        })
+    )
+    # keyword = forms.CharField(
+    #     label="検索",
+    #     max_length=100
+    # )
+    # target = forms.ChoiceField(label="検索対象", choices=(('goods_name', '商品名')))
+    
+    # class Meta:
+    #     fields = ['keyword', 'target']
+    # words = forms.CharField(label="検索", max_length=100)
+
