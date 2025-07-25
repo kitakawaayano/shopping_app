@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+
     <h1>商品を削除</h1>
     <p>"{{ goods.goods_name }} "を削除しますか。</p>
     <form action="" method="post">
@@ -13,5 +8,5 @@
         <button type="submit">削除</button>
     </form>
     <a href="{% url 'shopping_app:shopping' %}"></a>
-</body>
-</html>
+
+{% endblock %}

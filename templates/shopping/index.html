@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+
     <form action="{% url 'shopping_app:search' %}" method="get">
         {% comment %} {{ searchform.words }} {% endcomment %}
         <input type="search" placeholder="キーワードを入力" name="words" aria-label="search">
@@ -24,7 +19,5 @@
     {% endfor %}
     <br>
     <a href="/create">商品を追加</a>
-</body>
-</html>
 
-KblTGyaNxWoml0qwLErUXzLYj88GLKcFkNcBcqkvSXSAIztmDikYLlbsAUnEC5kQ
+{% endblock %}
