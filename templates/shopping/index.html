@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <form action="{% url 'shopping_app:search' %}" method="get">
-        {% comment %} {{ searchform.words }} {% endcomment %}
-        <input type="search" placeholder="キーワードを入力" name="words" aria-label="search">
-        <button type="submit">検索</button>
-    </form>
-
     <h1>商品一覧</h1>
     {% for goods in object_list %}
         <div>
