@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import shopping, detail, create, update, delete, search
+from .views import shopping, detail, create, update, delete, search, cart
 from shoppings import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,5 +14,6 @@ urlpatterns = [
     path('update/<int:pk>', update, name='update'),
     path('delete/<int:pk>', delete, name='delete'),
     path('search/', search, name='search'),
+    path('cart/user=<str:user>', cart, name='cart'),
 ]
 

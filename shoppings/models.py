@@ -37,4 +37,4 @@ class Orderhistory(models.Model):
     current_true = models.BooleanField(default=True)
     
     def __str__(self):
-        return self.account_id or f"Goods {self.account_id}"
+        return str(self.account_id) or f"Goods {self.account_id}"

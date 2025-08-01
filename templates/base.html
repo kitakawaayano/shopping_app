@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ショッピングアプリ{% block title %}{% endblock %}</title>
     {% bootstrap_css %}
+    <style>
+        .container{
+            background-color:#e8e9ea;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,10 +32,14 @@
                                 {% csrf_token %}
                                 <button type="submit" class="nav-link active">ログアウト</button>
                             </form>
+                            <li>
+                                <a href="{% url 'shopping_app:cart' user %}" class="nav-link active">買い物カート</a>
+                            </li>
                         {% else %}
                             <a href="{% url 'login' %}" class="nav-link active">ログイン</a>
                         {% endif %}
                     </li>
+
                     {% comment %} <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown

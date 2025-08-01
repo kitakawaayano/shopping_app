@@ -68,6 +68,29 @@ def search(request):
     else:
         print(searchform.errors)
         return render(request, 'shopping/result.html', {'Goods':goods, 'searchform':searchform})
+    
+class CartView(generic.ListView):
+    model = Orderhistory
+    template_name = 'shopping/cart.html'
+    
+    def get_queryset(self, **kwargs):
+        user = self.kwargs.get("user")
+        user_id = get_user_id(user)
+        queryset = super().get_queryset(**kwargs)
+        if user_id is not None:
+            self.queryset = queryset.filter(account_id=user_id).all()
+            # print(self.queryset)
+            
+        else:
+            self.queryset = None
+        return self.queryset
+        
+def get_user_id(user):
+        try:
+            user = Accounts.objects.get(account_name=user).account_id
+            return user
+        except Accounts.DoesNotExist:
+            return None
 
 
 shopping = IndexView.as_view()
@@ -75,3 +98,4 @@ detail = DetailView.as_view()
 create = CreateView.as_view()
 update = UpdateView.as_view()
 delete = DeleteView.as_view()
+cart = CartView.as_view()
