@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>買い物カート商品</h1>
+
+    {% for order in object_list %}
+        {% comment %} <form action="{% url 'shopping_app:cart' %}" method="post"> {% endcomment %}
+            <div class="mt-4">
+                <h3>{{ order.goods_id }}</h3>
+                <p>{{ order.goods_id.price }}円</p>
+                <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
+                <p>{{ order.goods_id.shops_id }}</p>
+                <button type="submit" class="btn btn-danger">削除</button>
+            </div>
+            <br>
+        {% comment %} </form> {% endcomment %}
+    {% endfor %}
+    <br>
+    <button type="submit" class="btn btn-primary">まとめて購入</button>
+
+{% endblock %}
