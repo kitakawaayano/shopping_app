@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>商品を購入</h1>
+    {% for order in object_list %}
+        <div class="mt-4">
+            <h3>{{ order.goods_id }}</h3>
+            <p>{{ order.goods_id.price }}円</p>
+            <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
+            <p>{{ order.goods_id.shops_id }}</p>
+        </div><br>
+    {% endfor %}
+    <form action="" method="post">
+        <button type="submit">購入</button>
+    </form>
+    <a href="{% url 'shopping_app:shopping' %}">一覧へ戻る</a>
+
+{% endblock %}
