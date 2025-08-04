@@ -2,20 +2,38 @@
 {% block content %}
 
     <h1>買い物カート商品</h1>
-
+    <script>
+        let sum = 0;
+        let count = 0;
+    </script>
     {% for order in object_list %}
-        {% comment %} <form action="{% url 'shopping_app:cart' %}" method="post"> {% endcomment %}
-            <div class="mt-4">
-                <h3>{{ order.goods_id }}</h3>
-                <p>{{ order.goods_id.price }}円</p>
-                <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
-                <p>{{ order.goods_id.shops_id }}</p>
+        {% comment %} user情報を引数に保持 {% endcomment %}
+        <script>
+            sum += {{ order.goods_id.price }};
+            count += 1;
+            {% comment %} console.log(sum); {% endcomment %}
+        </script>
+        <div class="mt-4">
+            <h3>{{ order.goods_id }}</h3>
+            <p>{{ order.goods_id.price }}円</p>
+            <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
+            <p>{{ order.goods_id.shops_id }}</p>
+            {% comment %} <form action="{% url 'shopping_app:delete' user %}" method="post"> {% endcomment %}
+                {% comment %} {% csrf_token %} {% endcomment %}
                 <button type="submit" class="btn btn-danger">削除</button>
-            </div>
-            <br>
-        {% comment %} </form> {% endcomment %}
+            {% comment %} </form> {% endcomment %}
+        </div>
+        <br>
+        {{ recerived_string }}
     {% endfor %}
+    
     <br>
-    <button type="submit" class="btn btn-primary">まとめて購入</button>
-
+    <h4 id="count"></h4>
+    <h4 id="sum"></h4>
+    <br>
+    <a href="{% url 'shopping_app:buy' user %}" class="btn btn-primary">購入手続きへ</a>
+    <script>
+        document.getElementById('count').textContent = `カートに入っている商品:${count}点`;
+        document.getElementById('sum').textContent = `合計:${sum}円`;
+    </script>
 {% endblock %}

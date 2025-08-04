@@ -80,10 +80,21 @@ class CartView(generic.ListView):
         if user_id is not None:
             self.queryset = queryset.filter(account_id=user_id).all()
             # print(self.queryset)
-            
         else:
             self.queryset = None
         return self.queryset
+    def my_view(request):
+        print("a")
+        if request.method == 'GET':
+            name = request.GET.get('user', '')
+            context = {'received_string': name}
+            return render(request, 'shopping/cart.html', context)
+        elif request.method == 'POST':
+            data = request.POST
+            print("b")
+            print(data)
+    
+    
         
 def get_user_id(user):
         try:
@@ -93,9 +104,27 @@ def get_user_id(user):
             return None
 
 
+class BuyAllView(generic.ListView):
+    model = Orderhistory
+    template_name = 'shopping/buy.html'
+    
+    def get_queryset(self, **kwargs):
+        user = self.kwargs.get("user")
+        user_id = get_user_id(user)
+        queryset = super().get_queryset(**kwargs)
+        if user_id is not None:
+            self.queryset = queryset.filter(account_id=user_id).all()
+            # print(self.queryset)
+            
+        else:
+            self.queryset = None
+        return self.queryset
+    
+
 shopping = IndexView.as_view()
 detail = DetailView.as_view()
 create = CreateView.as_view()
 update = UpdateView.as_view()
 delete = DeleteView.as_view()
 cart = CartView.as_view()
+buy = BuyAllView.as_view()
