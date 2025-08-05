@@ -7,9 +7,37 @@
     <title>ショッピングアプリ{% block title %}{% endblock %}</title>
     {% bootstrap_css %}
     <style>
+        body{
+            {% comment %} font-family: "ヒラギノ角ゴ","游明朝",serif; {% endcomment %}
+            font-family: "ヒラギノ角ゴ";
+        }
         .container{
             background-color: white;
         }
+        {% comment %} 各画面のタイトル文字 {% endcomment %}
+        .title{
+            position: relative;;
+            padding: 5px;
+            border-bottom: 3px solid #308cceff;
+            color: #333333;
+        }
+        .container-md{
+            border:1px black solid;
+            padding: 30px 50px;
+            border-radius: 10px;
+            margin: 20px 5px;
+        }
+        .container-view{
+            display: flex;
+
+        }
+        {% comment %} フォント　游ゴシック、メイリオ、ヒラギノ角ゴ ProN W3 {% endcomment %}
+        .goods-name{
+            color: #4d4d5bff;
+            margin: 20px 0px;
+            text-decoration: none;
+        }
+        
     </style>
 </head>
 <body>
@@ -55,15 +83,15 @@
                         <a class="nav-link disabled">Disabled</a>
                     </li> {% endcomment %}
                 </ul>
-                <form action="{% url 'shopping_app:search' %}" method="get">
+                <form action="{% url 'shopping_app:search' %}" method="get" class="d-flex">
                     {% comment %} {{ searchform.words }} {% endcomment %}
-                    <input type="search" placeholder="キーワードを入力" name="words" aria-label="search">
-                    <button type="submit">検索</button>
+                    <input type="search" placeholder="キーワードを入力" name="words" class="form-control me-2" aria-label="search">
+                    <button type="submit" class="btn btn-outline-success text-nowrap">検索</button>
                 </form>
             </div>
         </div>
     </nav>
-    <div class="container py-2">
+    <div class="container py-2" >
         {% block content %}
         {% endblock %}
     </div>

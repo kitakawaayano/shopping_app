@@ -84,14 +84,12 @@ class CartView(generic.ListView):
             self.queryset = None
         return self.queryset
     def my_view(request):
-        print("a")
         if request.method == 'GET':
             name = request.GET.get('user', '')
             context = {'received_string': name}
             return render(request, 'shopping/cart.html', context)
         elif request.method == 'POST':
             data = request.POST
-            print("b")
             print(data)
     
     
