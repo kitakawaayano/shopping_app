@@ -91,6 +91,28 @@ class CartView(generic.ListView):
         elif request.method == 'POST':
             data = request.POST
             print(data)
+            
+            
+    def post(self, request, *args, **kwargs):
+        user = self.kwargs.get("user")
+        user_id = get_user_id(user)
+        goods_id = request.POST.get("goods_id")
+        if user_id and goods_id:
+            # 既にカートに同じ商品があれば個数を増やす
+            try:
+                goods = Goods.objects.get(pk=goods_id)
+                order, created = Orderhistory.objects.get_or_create(
+                    account_id=user_id,
+                    goods_id=goods,
+                    current_true=True,
+                    defaults={"goods_number": 1}
+                )
+                if not created:
+                    order.goods_number += 1
+                    order.save()
+            except Goods.DoesNotExist:
+                pass
+        return redirect('shopping_app:cart', user)
     
     
 # 名前からidとってくる

@@ -5,33 +5,57 @@
     <script>
         let sum = 0;
         let count = 0;
+        let num = 0;
     </script>
-    {% for order in object_list %}
-        {% comment %} user情報を引数に保持 {% endcomment %}
-        <script>
-            sum += {{ order.goods_id.price }};
-            count += 1;
-            {% comment %} console.log(sum); {% endcomment %}
-        </script>
-        <div class="mt-4">
-            <h3>{{ order.goods_id }}</h3>
-            <p>{{ order.goods_id.price }}円</p>
-            <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
-            <p>{{ order.goods_id.shops_id }}</p>
-            {% comment %} <form action="{% url 'shopping_app:delete' user %}" method="post"> {% endcomment %}
-                {% comment %} {% csrf_token %} {% endcomment %}
-                <button type="submit" class="btn btn-danger">削除</button>
-            {% comment %} </form> {% endcomment %}
+
+    <div>
+        <table class="cart-table">
+            <tr>
+                <th>商品情報</th>
+                <th>価格</th>
+                <th>個数</th>
+                <th>小計</th>
+                <th></th>
+            </tr>
+            {% for order in object_list %}
+                {% comment %} user情報を引数に保持 {% endcomment %}
+                <script>
+                    sum += {{ order.goods_id.price }};
+                    count += 1;
+                    {% comment %} console.log(sum); {% endcomment %}
+                </script>
+                <div class="mt-4">
+                    <tr>
+                        <td class="cart-container">
+                            <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
+                            <div class="cart-info">
+                                <h3>{{ order.goods_id }}</h3><br>
+                                <p>{{ order.goods_id.shops_id }}</p>
+                            </div>
+                            {% comment %} <form action="{% url 'shopping_app:delete' user %}" method="post"> {% endcomment %}
+                                {% comment %} {% csrf_token %} {% endcomment %}
+                            {% comment %} </form> {% endcomment %}
+                        </td>
+                        <td><p>{{ order.goods_id.price }}円</p></td>
+                        <td><p>{{ order.goods_number }}個</p></td>
+                        
+                        <td><p id="small-sum"></p></td>
+                        <td><button type="submit" class="btn btn-danger">削除</button></td>
+                    </tr>
+
+                </div>
+                <br>
+                {{ recerived_string }}
+            {% endfor %}
+        </table>
+        <br>
+        <div class="cart-sum">
+            <h4 id="count"></h4>
+            <h4 id="sum"></h4>
         </div>
         <br>
-        {{ recerived_string }}
-    {% endfor %}
-    
-    <br>
-    <h4 id="count"></h4>
-    <h4 id="sum"></h4>
-    <br>
-    <a href="{% url 'shopping_app:buy' user %}" class="btn btn-primary">購入手続きへ</a>
+        <a href="{% url 'shopping_app:buy' user %}" class="btn btn-primary">購入手続きへ</a>
+    </div>
     <script>
         document.getElementById('count').textContent = `カートに入っている商品:${count}点`;
         document.getElementById('sum').textContent = `合計:${sum}円`;

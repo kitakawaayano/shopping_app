@@ -1,27 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
+    
+    <div style="display: flex;">
+        <img src="{{ goods.picture.url }}" alt="{{ goods.goods_name }}" class="detail-img">
 
-    <h1>{{ goods.goods_name }}の商品詳細</h1>
-    <div>
-        <p>{{ goods.price }}円</p>
-        <p>{{ goods.description }}</p>
-        <p>{{ goods.shops_id }}</p>
-        <img src="{{ goods.picture.url }}" alt="{{ goods.goods_name }}">
-        <p>{{ goods.number }}個</p>
+        <div class="detail-item">
+            <h3>{{ goods.goods_name }}</h3>
+            <h4>￥{{ goods.price }}</h4>
+            <p>{{ goods.number }}個</p>
+            
+            <p>説明：{{ goods.description }}</p>
+            <p>{{ goods.shops_id }}</p>
+
+            {% if user.is_authenticated %}
+                <form action="{% url 'shopping_app:cart' user %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="goods_id" value="{{ goods.goods_id }}">
+                    <button type="submit" class="btn btn-primary">買い物カートに入れる</button>
+                </form>
+            {% else %}
+                <p>ログインしていません。<a href="{% url 'login' %}">ログイン</a>してください。</p>
+            {% endif %}
+        </div>
     </div>
     {% comment %} 管理者なら {% endcomment %}
     {% if request.user.is_staff %}
         <p><a href="{% url "shopping_app:update" goods.goods_id %}">編集</a></p>
         <p><a href="{% url "shopping_app:delete" goods.goods_id %}">削除</a></p>
-    {% elif user.is_authenticated and goods.number > 0 %}
-        <form action="{% url 'shopping_app:cart' user %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="goods_id" value="{{ goods.goods_id }}">
-            <button type="submit" class="btn btn-primary">買い物カートに入れる</button>
-        </form>
-    {% else %}
-        <p>ログインしていません。<a href="{% url 'login' %}">ログイン</a>してください。</p>
     {% endif %}
-    <p><a href="{% url 'shopping_app:shopping' %}">一覧ページへ戻る</a></p>
+    <p><a href="{% url 'shopping_app:shopping' %}" class="btn back-index">一覧ページへ戻る</a></p>
     
 {% endblock %}
