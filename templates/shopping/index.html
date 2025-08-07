@@ -14,8 +14,18 @@
             {% endfor %}
         </div>
     <br>
+    <ol class="pagination-1">
+        <li class="prev"><a href="#"><</a></li>
+        <li><a href="#">1</a></li>
+        <li class="current"><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li class="next"><a href="#">></a></li>
+    </ol>
     {% if user.is_staff %}
-        <a href="/create">商品を追加</a>
+        <a href="/create" class="btn btn-primary">商品を追加</a>
+        {% comment %} <a href="/create" class=>商品を追加</a> {% endcomment %}
     {% endif %}
 
 {% endblock %}

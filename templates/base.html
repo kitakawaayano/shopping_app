@@ -6,39 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ショッピングアプリ{% block title %}{% endblock %}</title>
     {% bootstrap_css %}
-    <style>
-        body{
-            {% comment %} font-family: "ヒラギノ角ゴ","游明朝",serif; {% endcomment %}
-            font-family: "ヒラギノ角ゴ";
-        }
-        .container{
-            background-color: white;
-        }
-        {% comment %} 各画面のタイトル文字 {% endcomment %}
-        .title{
-            position: relative;;
-            padding: 5px;
-            border-bottom: 3px solid #308cceff;
-            color: #333333;
-        }
-        .container-md{
-            border:1px black solid;
-            padding: 30px 50px;
-            border-radius: 10px;
-            margin: 20px 5px;
-        }
-        .container-view{
-            display: flex;
-
-        }
-        {% comment %} フォント　游ゴシック、メイリオ、ヒラギノ角ゴ ProN W3 {% endcomment %}
-        .goods-name{
-            color: #4d4d5bff;
-            margin: 20px 0px;
-            text-decoration: none;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="./../static/css/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
