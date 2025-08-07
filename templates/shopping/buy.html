@@ -10,7 +10,8 @@
             <p>{{ order.goods_id.shops_id }}</p>
         </div><br>
     {% endfor %}
-    <form action="" method="post">
+    <form action="{% url 'shopping_app:buy' user %}" method="post">
+        {% csrf_token %}
         <button type="submit">購入</button>
     </form>
     <a href="{% url 'shopping_app:shopping' %}">一覧へ戻る</a>

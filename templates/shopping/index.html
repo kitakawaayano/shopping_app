@@ -14,6 +14,8 @@
             {% endfor %}
         </div>
     <br>
-    <a href="/create">商品を追加</a>
+    {% if user.is_staff %}
+        <a href="/create">商品を追加</a>
+    {% endif %}
 
 {% endblock %}
