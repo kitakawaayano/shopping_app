@@ -84,18 +84,16 @@ class CartView(generic.ListView):
             self.queryset = None
         return self.queryset
     def my_view(request):
-        print("a")
         if request.method == 'GET':
             name = request.GET.get('user', '')
             context = {'received_string': name}
             return render(request, 'shopping/cart.html', context)
         elif request.method == 'POST':
             data = request.POST
-            print("b")
             print(data)
     
     
-        
+# 名前からidとってくる
 def get_user_id(user):
         try:
             user = Accounts.objects.get(account_name=user).account_id
@@ -120,6 +118,20 @@ class BuyAllView(generic.ListView):
             self.queryset = None
         return self.queryset
     
+    def post(self, request, *args, **kwargs):
+        user = self.kwargs.get("user")
+        user_id = get_user_id(user)
+        if user_id is not None:
+            cart_items = Orderhistory.objects.filter(account_id=user_id, current_true=True)
+            for item in cart_items:
+                # 在庫を減らす
+                if item.goods_id and item.goods_id.number >= item.goods_number:
+                    item.goods_id.number -= item.goods_number
+                    item.goods_id.save()
+                # 購入済み
+                item.current_true = False
+                item.save()
+        return redirect('shopping_app:shopping')
 
 shopping = IndexView.as_view()
 detail = DetailView.as_view()

@@ -2,16 +2,20 @@
 {% block content %}
 
     <h1>商品一覧</h1>
-    {% for goods in object_list %}
-        <div>
-            <p><a href="{% url 'shopping_app:detail' goods.goods_id %}">{{ goods.goods_name }}</a></p>
-            <p>{{ goods.price }}円</p>
-            <p>{{ goods.description }}</p>
-            <p>{{ shops.shop_name }}</p>
-            <img src="./../media/{{ goods.picture }}" width="200" height="200"></img>
+        <div class="container-view">
+        {% for goods in object_list %}
+            <div class="container-md">
+                <img src="./../media/{{ goods.picture }}" width="200" height="200"></img>
+                <h5><a class="goods-name" href="{% url 'shopping_app:detail' goods.goods_id %}">{{ goods.goods_name }}</a></h5><br>
+                <h6>￥{{ goods.price }}</h6>
+                <p>{{ goods.description }}</p>
+                <p>{{ shops.shop_name }}</p>
+            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
     <br>
-    <a href="/create">商品を追加</a>
+    {% if user.is_staff %}
+        <a href="/create">商品を追加</a>
+    {% endif %}
 
 {% endblock %}
