@@ -15,6 +15,7 @@ urlpatterns = [
     path('delete/<int:pk>', delete, name='delete'),
     path('search/', search, name='search'),
     path('cart/user=<str:user>', cart, name='cart'),
+    path('cart/user=<str:user>/goods=<goods_id>', cart, name='cart'),
     path('buy/user=<str:user>', buy, name='buy'),
 ]
 

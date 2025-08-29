@@ -97,12 +97,14 @@ class CartView(generic.ListView):
         user = self.kwargs.get("user")
         user_id = get_user_id(user)
         goods_id = request.POST.get("goods_id")
+        account = Accounts.objects.get(pk=user_id)
         if user_id and goods_id:
             # 既にカートに同じ商品があれば個数を増やす
             try:
                 goods = Goods.objects.get(pk=goods_id)
+                print(goods)
                 order, created = Orderhistory.objects.get_or_create(
-                    account_id=user_id,
+                    account_id=account,
                     goods_id=goods,
                     current_true=True,
                     defaults={"goods_number": 1}
@@ -154,6 +156,9 @@ class BuyAllView(generic.ListView):
                 item.current_true = False
                 item.save()
         return redirect('shopping_app:shopping')
+    
+    
+ 
 
 shopping = IndexView.as_view()
 detail = DetailView.as_view()
