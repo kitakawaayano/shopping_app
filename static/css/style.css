@@ -3,18 +3,22 @@ body{
     background-color: #B4CCE3;
     color: #454545;
 }
+
+
+
 .container{
     background-color: #fff;
     margin-top: 20px;
     padding: 60px;
     border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(33, 42, 51, 0.672);
     
 }
 /* 各画面のタイトル文字 */
 .title{
     position: relative;
     padding: 5px;
-    margin-top: 50px;
+    margin-top: 40px;
     border-bottom: 3px solid #B4CCE3;
     color: #454545;
 }
@@ -146,8 +150,14 @@ body{
 }
 
 /* cartページ */
+.cart-img{
+    width: 200px;
+    height: 200px;
+}
+
 .cart-table {
     width: 100%;
+
 }
 
 .cart-table th {
@@ -155,14 +165,18 @@ body{
     border: 3px white solid;
     color: #454545;
     padding: 20px;
-    margin: 100px;
 }
 
 .cart-table td{
     vertical-align: middle;
     padding: 20px;
+    font-size: medium;
 }
 
+.cart-del{
+    text-align: center;
+    margin: 0 auto;
+}
 
 .cart-sum {
     background-color: #DBDBDB;
@@ -206,4 +220,88 @@ body{
     background-color: #B4CCE3;
     color: #fff;
 
+}
+
+/* add_goodsページ */
+.add-div{
+    margin: 30px;
+}
+
+.add-div input{
+    width: 80%;
+    padding: 8px 10px;
+    border: 1px solid #969da3;
+    border-radius: 3px;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.add-div textarea{
+    color: #999;
+    border: 1px solid #969da3;
+    border-radius: 3px;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+
+.add-div select {
+    min-width: 230px;
+    height: 2.8em;
+    padding: .4em calc(.8em + 30px) .4em .8em;
+    border: 1px solid #b4cce3;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #454545;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.add-div::after {
+    position: absolute;
+    right: 15px;
+    width: 10px;
+    height: 7px;
+    background-color: #656565;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    content: '';
+    pointer-events: none;
+}
+
+
+.add-btn {
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    margin: 20px;
+    padding: .9em 2em;
+    overflow: hidden;
+    border: 1px solid #6ea8dd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #6ea8dd;
+    font-size: 1em;
+}
+
+.add-btn:hover {
+    background-color: transparent;
+    color: #6ea8dd;
+}
+
+.add-btn::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 0;
+    height: 100%;
+    background-color: #6ea8dd;
+    content: '';
+    transition: width .3s ease;
+}
+
+.add-btn:hover::before {
+    width: 100%;
 }

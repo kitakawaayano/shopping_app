@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+<script>
+    let sum = 0;
+    let count = 0;
+    let num = 0;
+</script>
     <h1 class="title">買い物カート商品</h1>
-    <script>
-        let sum = 0;
-        let count = 0;
-        let num = 0;
-    </script>
 
     <div>
-        <table class="cart-table">
+        <table class="cart-table table">
             <tr>
                 <th>商品情報</th>
                 <th>価格</th>
@@ -20,14 +20,14 @@
             {% for order in object_list %}
                 {% comment %} user情報を引数に保持 {% endcomment %}
                 <script>
-                    sum += {{ order.goods_id.price }};
-                    count += 1;
+                    sum += {{ order.goods_id.price }} * {{ order.goods_number }};
+                    count += {{ order.goods_number }};
                     {% comment %} console.log(sum); {% endcomment %}
                 </script>
-                <div class="mt-4">
+                <div>
                     <tr>
                         <td class="cart-container">
-                            <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
+                            <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}" class="cart-img">
                             <div class="cart-info">
                                 <h3>{{ order.goods_id }}</h3><br>
                                 <p>{{ order.goods_id.shops_id }}</p>
@@ -39,10 +39,14 @@
                         <td><p>{{ order.goods_id.price }}円</p></td>
                         <td><p>{{ order.goods_number }}個</p></td>
                         
-                        <td><p id="small-sum"></p></td>
-                        <td><button type="submit" class="btn btn-danger">削除</button></td>
+                        <td class="small-sum">
+                            {% widthratio order.goods_id.price 1 order.goods_number %}円
+                        </td>
+                        <form action="{% url 'shopping_app:cart' user order.goods_id %}" method="post">
+                            {% csrf_token %}
+                            <td class="cart-del"><button type="submit" class="btn btn-danger">削除</button></td>
+                        </form>
                     </tr>
-
                 </div>
                 <br>
                 {{ recerived_string }}
