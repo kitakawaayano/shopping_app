@@ -40,11 +40,11 @@
                         <td><p>{{ order.goods_number }}個</p></td>
                         
                         <td class="small-sum">
-                            {% widthratio order.goods_id.price 1 order.goods_number %}円
+                            <p>{% widthratio order.goods_id.price 1 order.goods_number %}円</p>
                         </td>
-                        <form action="{% url 'shopping_app:cart' user order.goods_id %}" method="post">
+                        <form action="{% url 'shopping_app:delcart' user order.goods_id %}" method="post">
                             {% csrf_token %}
-                            <td class="cart-del"><button type="submit" class="btn btn-danger">削除</button></td>
+                            <td><button type="submit" class="btn btn-danger cart-del">削除</button></td>
                         </form>
                     </tr>
                 </div>

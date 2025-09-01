@@ -158,12 +158,26 @@ class BuyAllView(generic.ListView):
         return redirect('shopping_app:shopping')
     
     
- 
+class DelCartView(View):
+    def post(self, request, *args, **kwargs):
+        user = self.kwargs.get("user")
+        user_id = get_user_id(user)
+        goods_id = self.kwargs.get("goods_id")
 
+        if user_id and goods_id:
+            try:
+                cart_item = Orderhistory.objects.get(account_id=Accounts.objects.get(pk=user_id), goods_id=Goods.objects.get(goods_name=goods_id), current_true=True)
+                cart_item.delete()
+            except Orderhistory.DoesNotExist:
+                pass
+        return redirect('shopping_app:cart', user)
+    
+    
 shopping = IndexView.as_view()
 detail = DetailView.as_view()
 create = CreateView.as_view()
 update = UpdateView.as_view()
 delete = DeleteView.as_view()
 cart = CartView.as_view()
+delcart = DelCartView.as_view()
 buy = BuyAllView.as_view()

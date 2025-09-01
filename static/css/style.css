@@ -175,7 +175,12 @@ body{
 
 .cart-del{
     text-align: center;
-    margin: 0 auto;
+    margin: 10px;
+}
+.cart-del:hover {
+    background-color: rgb(231, 79, 79);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(180,204,227,0.18);
 }
 
 .cart-sum {
