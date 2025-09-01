@@ -58,7 +58,9 @@
             <h4 id="sum"></h4>
         </div>
         <br>
-        <a href="{% url 'shopping_app:buy' user %}" class="btn btn-primary">購入手続きへ</a>
+        {% if object_list %}
+            <a href="{% url 'shopping_app:buy' user %}" class="btn btn-primary">購入手続きへ</a>
+        {% endif %}
     </div>
     <script>
         document.getElementById('count').textContent = `カートに入っている商品:${count}点`;
