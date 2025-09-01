@@ -12,8 +12,8 @@
     {% endfor %}
     <form action="{% url 'shopping_app:buy' user %}" method="post">
         {% csrf_token %}
-        <button type="submit">購入</button>
+        <button type="submit" class="btn">購入</button>
     </form>
-    <a href="{% url 'shopping_app:shopping' %}">一覧へ戻る</a>
+    <a href="{% url 'shopping_app:shopping' %}" class="btn back-index">一覧へ戻る</a>
 
 {% endblock %}

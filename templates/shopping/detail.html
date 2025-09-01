@@ -13,21 +13,23 @@
             <p>{{ goods.shops_id }}</p>
 
             {% if user.is_authenticated %}
-                <form action="{% url 'shopping_app:cart' user %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="goods_id" value="{{ goods.goods_id }}">
-                    <button type="submit" class="btn btn-primary">買い物カートに入れる</button>
-                </form>
+                {% if user.is_staff %}
+                    {% comment %} 管理者なら {% endcomment %}
+                    <p style="margin-top: 20px;"><a href="{% url "shopping_app:update" goods.goods_id %}" class="btn" style="background-color: #6393c2ff;">編集</a>
+                    <a href="{% url "shopping_app:delete" goods.goods_id %}" class="btn" style="background-color: #c4594eff;">削除</a></p>
+                {% else %}
+                    <form action="{% url 'shopping_app:cart' user %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="goods_id" value="{{ goods.goods_id }}">
+                        <button type="submit" class="btn btn-primary">買い物カートに入れる</button>
+                    </form>
+                {% endif %}
             {% else %}
                 <p>ログインしていません。<a href="{% url 'login' %}">ログイン</a>してください。</p>
             {% endif %}
         </div>
     </div>
-    {% comment %} 管理者なら {% endcomment %}
-    {% if request.user.is_staff %}
-        <p><a href="{% url "shopping_app:update" goods.goods_id %}">編集</a></p>
-        <p><a href="{% url "shopping_app:delete" goods.goods_id %}">削除</a></p>
-    {% endif %}
+
     <p><a href="{% url 'shopping_app:shopping' %}" class="btn back-index">一覧ページへ戻る</a></p>
     
 {% endblock %}
