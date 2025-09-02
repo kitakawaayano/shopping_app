@@ -16,7 +16,7 @@
             {% bootstrap_form form %}
             <p>{% bootstrap_button button_type="submit" content="ログイン" size="md" %}</p>
         </form>
-        <p><a href="{% url 'accounts:signup' %}">{% bootstrap_button button_type="submit" content="新規登録" size="md" %}</a></p>
+        <p><a href="{% url 'accounts:signup' %}" style="background-color: red;">{% bootstrap_button button_type="submit" content="新規登録" size="md" style="background-color: #c9a9e2ff;" %}</a></p>
     </section>
     {% endif %}
 
