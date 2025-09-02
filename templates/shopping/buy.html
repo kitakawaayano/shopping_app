@@ -1,19 +1,64 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h1>商品を購入</h1>
-    {% for order in object_list %}
-        <div class="mt-4">
-            <h3>{{ order.goods_id }}</h3>
-            <p>{{ order.goods_id.price }}円</p>
-            <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}">
-            <p>{{ order.goods_id.shops_id }}</p>
-        </div><br>
-    {% endfor %}
-    <form action="{% url 'shopping_app:buy' user %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn">購入</button>
-    </form>
+    <script>
+        let sum = 0;
+        let num = 0;
+    </script>
+    <h1 class="mt-5 title">購入明細</h1>
+    <div style="display: flex;">
+        {% for order in object_list %}
+            <script>
+                sum += {{ order.goods_id.price }} * {{ order.goods_number }};
+                num += {{ order.goods_number }};
+            </script>
+            {% comment %} <div class="container-md">
+                <div class="mt-2"> {% endcomment %}
+                    {% comment %} <h3>{{ order.goods_id.goods_name }}</h3> {% endcomment %}
+                    {% comment %} <h3>{{ order.goods_id }}</h3> {% endcomment %}
+                    {% comment %} <p>{{ order.goods_id.price }}円</p> {% endcomment %}
+                    {% comment %} <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}" style="margin: 5px;"> {% endcomment %}
+                    {% comment %} <p>{{ order.goods_id.shops_id }}</p> {% endcomment %}
+                {% comment %} </div><br>
+            </div> {% endcomment %}
+        {% endfor %}
+    </div>
+    <div style="background-color: #f1f1f1ff; padding: 36px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); margin: 50px 0px;">
+        <h3 id="sum" style="font-size: 2rem;"></h3><br>
+
+
+        {% comment %} 支払い方法 {% endcomment %}
+        <div class="pays">
+            <h3 style="border-bottom: 2px solid #B4CCE3; margin-bottom: 20px;">支払い方法</h3>
+            <input type="radio" id="pay-way-1" name="pay-way" value="cash" class="pay-radio" checked>
+            <label for="pay-way-1" class="pay-label cash">
+                <img src="./../media/cash.png" alt="現金">現金払い
+            </label>
+
+            <input type="radio" id="pay-way-2" name="pay-way" value="card" class="pay-radio">
+            <label for="pay-way-2" class="pay-label curecard">
+                <img src="./../media/card.png" alt="クレジットカード">クレジットカード
+            </label>
+
+            <input type="radio" id="pay-way-3" name="pay-way" value="electronic" class="pay-radio">
+            <label for="pay-way-3" class="pay-label electronic">
+                <img src="./../media/sumaho.png" alt="電子マネー">電子マネー
+            </label>
+
+            <input type="radio" id="pay-way-4" name="pay-way" value="convenience" class="pay-radio">
+            <label for="pay-way-4" class="pay-label convenience">
+                <img src="./../media/konbini.png" alt="コンビニ払い">コンビニ払い
+            </label>
+        </div>
+
+        <form action="{% url 'shopping_app:buy' user %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn" style="width: 150px; background-color: #fff; font: bold; border: 2px solid #64BCFC; color: #64BCFC; font-size: 22px;">購入</button>
+        </form>
+    </div>
     <a href="{% url 'shopping_app:shopping' %}" class="btn back-index">一覧へ戻る</a>
 
+    <script>
+        document.getElementById('sum').textContent = `合計金額:${sum}円`;
+    </script>
 {% endblock %}

@@ -10,9 +10,9 @@
                 <h5><a class="goods-name" href="{% url 'shopping_app:detail' goods.goods_id %}">{{ goods.goods_name }}</a></h5><br>
                 <h6>￥{{ goods.price }}</h6>
                 <p>{{ goods.description }}</p>
-                <p>{{ shops.shop_name }}</p>
+                <p>{{ goods.shops_id.shop_name }}</p>
             </div>
-            {% endfor %}
+        {% endfor %}
         </div>
     <br>
     <ol class="pagination-1">

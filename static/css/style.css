@@ -76,7 +76,7 @@ body{
     width: 200px;
     height: 200px;
     margin-bottom: 20px;
-    background-color: #DBDBDB;
+    background-color: #ffffff;
     overflow: hidden;
 }
 .goods-name {
@@ -314,3 +314,44 @@ body{
     color: #ffffff;
 }
 
+
+/* buy.html支払いラジオボタン */
+.pays {
+    margin: 20px 0;
+}
+
+.pay-radio {
+    width: 80px;
+    height: 60px;
+    display: none;
+}
+
+.pay-label img{
+    width: 30px;
+    height: auto;
+    margin-right: 8px;
+}
+
+.pay-label {
+    display: inline-block;
+    padding: 30px 40px;
+    margin: 8px 8px 8px 0;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.1em;
+    background-color:rgba(69, 69, 69, 0.48);
+}
+.pay-radio:checked + .pay-label.cash {
+    background-color: #4cafad;
+}
+.pay-radio:checked + .pay-label.curecard {
+    background-color: #4794d3;
+}
+.pay-radio:checked + .pay-label.electronic {
+    background-color: #e4a648;
+}
+.pay-radio:checked + .pay-label.convenience {
+    background-color: #c25ad4;
+}

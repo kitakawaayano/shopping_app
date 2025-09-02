@@ -16,9 +16,21 @@ from django.views.generic import CreateView, DetailView, UpdateView
 class IndexView(generic.ListView):
     model = Goods
     template_name = 'shopping/index.html'
+    def get_queryset(self):
+        user_name = self.request.GET.get('user') or self.request.user.username
+        try:
+            account = Accounts.objects.get(account_name=user_name)
+            if account.admin == 1:
+                return Goods.objects.all()
+            else:
+                return Goods.objects.filter(number__gte=1)
+        except Accounts.DoesNotExist:
+            # アカウントがない
+            return Goods.objects.filter(number__gte=1)
+
     def get_context_data(self, **kwargs):
         shop = super().get_context_data(**kwargs)
-        shop["shops"] = Shops.objects.all
+        shop["shops"] = Shops.objects.all()
         return shop
      
 
@@ -78,7 +90,8 @@ class CartView(generic.ListView):
         user_id = get_user_id(user)
         queryset = super().get_queryset(**kwargs)
         if user_id is not None:
-            self.queryset = queryset.filter(account_id=user_id).all()
+            # 現在購入している者だけを持ってくるようにする
+            self.queryset = queryset.filter(account_id=user_id, current_true=True).all()
             # print(self.queryset)
         else:
             self.queryset = None
