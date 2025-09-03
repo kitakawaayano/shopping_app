@@ -41,6 +41,10 @@
                         {% endif %}
                         {% if user.is_staff %}
                             <a href="{% url 'shopping_app:create' %}" class="nav-link active admin-style">＋商品追加</a>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'shopping_app:history' user %}" class="nav-link active">購入履歴</a>
+                            </li>
                         {% endif %}
                     </li>
 

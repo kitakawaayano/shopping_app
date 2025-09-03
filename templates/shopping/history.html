@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    let sum = 0;
+    let count = 0;
+    let num = 0;
+</script>
+    <h1 class="title" style="margin-bottom: 9px;">購入履歴</h1>
+    <table class="cart-table table">
+        <tr>
+            <th>商品情報</th>
+            <th>価格</th>
+            <th>個数</th>
+            <th>小計</th>
+        </tr>
+        {% for order in object_list %}
+            <div>
+                <tr>
+                    <td class="cart-container">
+                        <img src="{{ order.goods_id.picture.url }}" alt="{{ order.goods_id.goods_name }}" class="cart-img">
+                        <div class="cart-info">
+                            <h3>{{ order.goods_id }}</h3><br>
+                            <p>{{ order.goods_id.shops_id }}</p>
+                        </div>
+                    </td>
+                    <td><p>{{ order.goods_id.price }}円</p></td>
+                    <td><p>{{ order.goods_number }}個</p></td>
+                    
+                    <td class="small-sum">
+                        <p>{% widthratio order.goods_id.price 1 order.goods_number %}円</p>
+                    </td>
+                </tr>
+            </div>
+        {% endfor %}
+    </table>
+
+
+    {% if object_list %}
+        {% comment %} <a href="{% url 'shopping_app:buy' user %}" class="btn btn-primary">購入手続きへ</a> {% endcomment %}
+    {% endif %}
+
+    <a href="{% url 'shopping_app:shopping' %}" class="btn back-index">一覧へ戻る</a>
+
+{% endblock %}

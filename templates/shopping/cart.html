@@ -62,6 +62,10 @@
             <a href="{% url 'shopping_app:buy' user %}" class="btn btn-primary">購入手続きへ</a>
         {% endif %}
     </div>
+
+    <a href="{% url 'shopping_app:shopping' %}" class="btn back-index">一覧へ戻る</a>
+
+
     <script>
         document.getElementById('count').textContent = `カートに入っている商品:${count}点`;
         document.getElementById('sum').textContent = `合計:${sum}円`;
