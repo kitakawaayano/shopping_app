@@ -148,7 +148,7 @@ class BuyAllView(generic.ListView):
         user_id = get_user_id(user)
         queryset = super().get_queryset(**kwargs)
         if user_id is not None:
-            self.queryset = queryset.filter(account_id=user_id).all()
+            self.queryset = queryset.filter(account_id=user_id, current_true=True).all()
             # print(self.queryset)
             
         else:
@@ -186,6 +186,22 @@ class DelCartView(View):
         return redirect('shopping_app:cart', user)
     
     
+class HistoryView(generic.ListView):
+    model = Orderhistory
+    template_name = 'shopping/history.html'
+    
+    def get_queryset(self, **kwargs):
+        user = self.kwargs.get("user")
+        user_id = get_user_id(user)
+        queryset = super().get_queryset(**kwargs)
+        if user_id is not None:
+            # 過去に購入しているものを持ってくるようにする
+            self.queryset = queryset.filter(account_id=user_id, current_true=False).all()
+        else:
+            self.queryset = None
+        return self.queryset
+    
+    
 shopping = IndexView.as_view()
 detail = DetailView.as_view()
 create = CreateView.as_view()
@@ -194,3 +210,4 @@ delete = DeleteView.as_view()
 cart = CartView.as_view()
 delcart = DelCartView.as_view()
 buy = BuyAllView.as_view()
+history = HistoryView.as_view()

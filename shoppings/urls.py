@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import shopping, detail, create, update, delete, search, cart, delcart, buy
+from .views import shopping, detail, create, update, delete, search, cart, delcart, buy, history
 from shoppings import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -18,5 +18,6 @@ urlpatterns = [
     # ↓goods_idと対応した商品をカートから削除する
     path('cart/user=<str:user>/goods=<goods_id>', delcart, name='delcart'),
     path('buy/user=<str:user>', buy, name='buy'),
+    path('history/user=<str:user>', history, name='history')
 ]
 
