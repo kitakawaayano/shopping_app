@@ -18,15 +18,28 @@ class IndexView(generic.ListView):
     template_name = 'shopping/index.html'
     def get_queryset(self):
         user_name = self.request.GET.get('user') or self.request.user.username
+        order = self.request.GET.get('order')
+        shop_name = self.request.GET.get('shop_name')
         try:
             account = Accounts.objects.get(account_name=user_name)
             if account.admin == 1:
-                return Goods.objects.all()
+                queryset = Goods.objects.all()
             else:
-                return Goods.objects.filter(number__gte=1)
+                queryset = Goods.objects.filter(number__gte=1)
         except Accounts.DoesNotExist:
-            # アカウントがない
-            return Goods.objects.filter(number__gte=1)
+            queryset = Goods.objects.filter(number__gte=1)
+
+        # 店名で絞り込み
+        if shop_name:
+            queryset = queryset.filter(shops_id__shop_name=shop_name)
+
+        # 値段順
+        if order == 'asc':
+            queryset = queryset.order_by('price')
+        elif order == 'desc':
+            queryset = queryset.order_by('-price')
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         shop = super().get_context_data(**kwargs)

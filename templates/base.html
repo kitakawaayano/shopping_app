@@ -36,15 +36,14 @@
                                     <img src="./../media/cart.png" alt="cart" width="16" height="16" style="margin-bottom: 5px; margin-right: 3px;">買い物カート
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{% url 'shopping_app:history' user %}" class="nav-link active">購入履歴</a>
+                            </li>
                         {% else %}
                             <a href="{% url 'login' %}" class="nav-link active">ログイン</a>
                         {% endif %}
                         {% if user.is_staff %}
                             <a href="{% url 'shopping_app:create' %}" class="nav-link active admin-style">＋商品追加</a>
-                        {% else %}
-                            <li class="nav-item">
-                                <a href="{% url 'shopping_app:history' user %}" class="nav-link active">購入履歴</a>
-                            </li>
                         {% endif %}
                     </li>
 
